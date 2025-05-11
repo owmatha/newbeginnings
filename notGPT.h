@@ -7,16 +7,10 @@
 
 using namespace std;
 
-class LetterPair {
-public:
-    LetterPair(char l1, char l2);
-    string getLetterPair() const;
-    bool operator<(const LetterPair& other) const;
-
-private:
-    char letterOne, letterTwo;
-};
-
+// Class: notGPT
+// Purpose: Generates 4-8 English-like sentence paragraphs with 5-10 words each
+// Author: Owen Mather (10592925)
+// Date: 23/04/2025
 class notGPT {
 public:
     notGPT();
@@ -31,7 +25,7 @@ private:
     string generateSentence(int lengMin = 5, int lengMax = 10);
     void generateText();
 
-    map<LetterPair, map<char, int>> letterPairs;
+    map<string, map<char, int>> letterPairs;
     mt19937 rng;
     string outputText, myText;
 };

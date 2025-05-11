@@ -4,7 +4,7 @@
 #include "Word.h"
 
 // Class: Dictionary
-// Purpose: Loads and manages dictionary entries, and handles menu-based tasks
+// Purpose: Loads and manages dictionary entries and menu
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
 class Dictionary {

@@ -1,5 +1,5 @@
 // File: ImprovedDictionary.h
-// Purpose: Header file for the ImprovedDictionary class with NotGPT functionality
+// Purpose: Header and implementation file for the ImprovedDictionary class with NotGPT functionality
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
 

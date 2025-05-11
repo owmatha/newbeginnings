@@ -5,10 +5,22 @@
 
 using namespace std;
 
+// Function: Dictionary
+// Purpose: Constructor and RNG seeder
+// Input: None
+// Output: None
+// Author: Owen Mather (10592925)
+// Date: 24/04/2025
 Dictionary::Dictionary() {
     rng.seed(random_device{}());
 }
 
+// Function: displayMenu
+// Purpose: Displays and initiates menu
+// Input: None
+// Output: None
+// Author: Owen Mather (10592925)
+// Date: 24/04/2025
 void Dictionary::displayMenu() {
     string userSearch;
     while (true) {
@@ -47,6 +59,12 @@ void Dictionary::displayMenu() {
     cout << "\nGoodbye!" << endl;
 }
 
+// Function: loadDictionary
+// Purpose: Loads a dictionary file and stores each entry as a Word object
+// Input: File name (string)
+// Output: 1 for success, 0 for failure (this is not used should I take it out?)
+// Author: Owen Mather (10592925)
+// Date: 25/04/2025
 int Dictionary::loadDictionary(string dictName) {
     ifstream dictFile(dictName);
     if (!dictFile.is_open()) {
@@ -79,6 +97,12 @@ int Dictionary::loadDictionary(string dictName) {
     return 1;
 }
 
+// Function: printRandWord
+// Purpose: Displays a randomly selected word from the dictionary
+// Input: None
+// Output: Prints a random word, returns nothing
+// Author: Owen Mather (10592925)
+// Date: 25/04/2025
 void Dictionary::printRandWord() {
     if (words.empty()) {
         cout << "Error – dictionary empty" << endl;
@@ -91,6 +115,12 @@ void Dictionary::printRandWord() {
     words[randomNum].printWord();
 }
 
+// Function: wordSearch
+// Purpose: Looks for a specific word in the dictionary and displays it if found
+// Input: Search term (string)
+// Output: Prints result, returns nothing
+// Author: Owen Mather (10592925)
+// Date: 25/04/2025
 void Dictionary::wordSearch(string userWordSearch) {
     if (words.empty()) {
         cout << "Error – dictionary empty" << endl;
@@ -108,6 +138,12 @@ void Dictionary::wordSearch(string userWordSearch) {
     return;
 }
 
+// Function: extractType
+// Purpose: Formats word type abbreviations for display
+// Input: Abbreviated type (string)
+// Output: Formatted type string (string)
+// Author: Owen Mather (10592925)
+// Date: 25/04/2025
 string Dictionary::extractType(string S) {
     if (S == "v") return "(v.)";
     if (S == "n") return "(n.)";
