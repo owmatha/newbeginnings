@@ -91,17 +91,21 @@ void Dictionary::printRandWord() {
     words[randomNum].printWord();
 }
 
-int Dictionary::wordSearch(string userWordSearch) {
+void Dictionary::wordSearch(string userWordSearch) {
+    if (words.empty()) {
+        cout << "Error – dictionary empty" << endl;
+        return;
+    }
     for (const Word& word : words) {
         string wordName = word.getName();
         transform(wordName.begin(), wordName.end(), wordName.begin(), ::tolower);
         if (wordName == userWordSearch) {
             word.printWord();
-            return 0;
+            return;
         }
     }
     cout << "Word not found.\n" << endl;
-    return 1;
+    return;
 }
 
 string Dictionary::extractType(string S) {

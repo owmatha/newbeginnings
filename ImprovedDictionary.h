@@ -30,7 +30,7 @@ public:
             cout << "2) Search a word." << endl;
             cout << "3) Show a random word." << endl;
             cout << "4) Generate text." << endl;
-            cout << "5) Show probabilities." << endl;
+            cout << "5) Show next letter probabilities." << endl;
             cout << "999 for exit\n" << endl;
 
             cin >> userSearch;
@@ -73,7 +73,7 @@ public:
     }
 
 private:
-    wordGenerator newGenerator;
+    notGPT newGenerator;
 };
 
 #endif

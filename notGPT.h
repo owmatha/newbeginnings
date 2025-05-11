@@ -17,9 +17,9 @@ private:
     char letterOne, letterTwo;
 };
 
-class wordGenerator {
+class notGPT {
 public:
-    wordGenerator();
+    notGPT();
     void generateMyText();
     string getGeneratedText();
     void returnProbabilities(const string& letters);

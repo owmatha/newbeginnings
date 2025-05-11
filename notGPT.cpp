@@ -5,19 +5,21 @@
 #include <vector>
 #include <algorithm>
 
+using namespace std;
+
 // Implementation of LetterPair
 LetterPair::LetterPair(char l1, char l2) : letterOne(l1), letterTwo(l2) {}
 
-std::string LetterPair::getLetterPair() const {
-    return std::string(1, letterOne) + std::string(1, letterTwo);
+string LetterPair::getLetterPair() const {
+    return string(1, letterOne) + string(1, letterTwo);
 }
 
 bool LetterPair::operator<(const LetterPair& other) const {
-    return std::tie(letterOne, letterTwo) < std::tie(other.letterOne, other.letterTwo);
+    return tie(letterOne, letterTwo) < tie(other.letterOne, other.letterTwo);
 }
 
-wordGenerator::wordGenerator() {
-    rng.seed(std::random_device{}());
+notGPT::notGPT() {
+    rng.seed(random_device{}());
     loadText("littleprince.txt");
 }
 
@@ -27,7 +29,7 @@ wordGenerator::wordGenerator() {
 // Output: None (stores result internally)
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
-void wordGenerator::generateMyText() {
+void notGPT::generateMyText() {
     this->generateText();
 }
 
@@ -37,7 +39,7 @@ void wordGenerator::generateMyText() {
 // Output: A string containing the final output text
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
-std::string wordGenerator::getGeneratedText() {
+string notGPT::getGeneratedText() {
     return outputText;
 }
 
@@ -47,8 +49,8 @@ std::string wordGenerator::getGeneratedText() {
 // Output: Printed list of characters and probabilities
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
-void wordGenerator::returnProbabilities(const std::string& letters) {
-    std::vector<std::pair<char, int>> counts = {{'\0', 0}, {'\0', 0}, {'\0', 0}};
+void notGPT::returnProbabilities(const string& letters) {
+    vector<pair<char, int>> counts = {{'\0', 0}, {'\0', 0}, {'\0', 0}};
     int total = 0;
 
     for (auto& letter : letterPairs[LetterPair(letters[0], letters[1])]) {
@@ -66,7 +68,7 @@ void wordGenerator::returnProbabilities(const std::string& letters) {
     }
 
     for (auto& countings : counts) {
-        std::cout << "'" << countings.first << "' => " << countings.second << " = " << static_cast<double>(countings.second) / total * 100 << "%." << std::endl;
+        cout << "'" << countings.first << "' => " << countings.second << " = " << static_cast<double>(countings.second) / total * 100 << "%." << endl;
     }
     return;
 }
@@ -77,15 +79,15 @@ void wordGenerator::returnProbabilities(const std::string& letters) {
 // Output: None (updates private variables)
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
-void wordGenerator::loadText(const std::string& fileName) {
-    std::string allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,' ";
-    std::ifstream textFile{fileName};
-    std::string rawText{std::istreambuf_iterator<char>(textFile), std::istreambuf_iterator<char>()};
+void notGPT::loadText(const string& fileName) {
+    string allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,' ";
+    ifstream textFile{fileName};
+    string rawText{istreambuf_iterator<char>(textFile), istreambuf_iterator<char>()};
     textFile.close();
 
     for (char& c : rawText) {
-        if (allowedChars.find(c) != std::string::npos) {
-            myText += std::tolower(c);
+        if (allowedChars.find(c) != string::npos) {
+            myText += tolower(c);
         }
     }
 
@@ -101,9 +103,9 @@ void wordGenerator::loadText(const std::string& fileName) {
 // Output: String containing one starter letter
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
-std::string wordGenerator::generateStartingLetters() {
-    std::string approvedStarters = "bcdefghjklmnopgrstuvwyz";
-    std::uniform_int_distribution<> dist(0, approvedStarters.length() - 1);
+string notGPT::generateStartingLetters() {
+    string approvedStarters = "bcdefghjklmnopgrstuvwyz";
+    uniform_int_distribution<> dist(0, approvedStarters.length() - 1);
     char nextLetter = approvedStarters[dist(rng)];
     return " "s + nextLetter;
 }
@@ -114,10 +116,10 @@ std::string wordGenerator::generateStartingLetters() {
 // Output: An English-like word (string)
 // Author: Owen Mather (10592925)
 // Date: 21/04/2025
-std::string wordGenerator::generateWord(int lengMin, int lengMax) {
-    std::string randomWord = generateStartingLetters();
+string notGPT::generateWord(int lengMin, int lengMax) {
+    string randomWord = generateStartingLetters();
 
-    std::uniform_int_distribution<> lengthDist(lengMin, lengMax);
+    uniform_int_distribution<> lengthDist(lengMin, lengMax);
     int targetLength = lengthDist(rng);
 
     while (randomWord.size() < targetLength) {
@@ -132,7 +134,7 @@ std::string wordGenerator::generateWord(int lengMin, int lengMax) {
 
         if (totalWeight == 0) break;
 
-        std::uniform_int_distribution<> dist(0, totalWeight - 1);
+        uniform_int_distribution<> dist(0, totalWeight - 1);
         int myWeight = dist(rng);
 
         for (const auto& myPair : letterPairs[key]) {
@@ -156,10 +158,10 @@ std::string wordGenerator::generateWord(int lengMin, int lengMax) {
 // Output: A sentence (edited for grammar)
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
-std::string wordGenerator::generateSentence(int lengMin, int lengMax) {
-    std::string mySentence = "";
+string notGPT::generateSentence(int lengMin, int lengMax) {
+    string mySentence = "";
 
-    std::uniform_int_distribution<> wordCountDist(lengMin, lengMax);
+    uniform_int_distribution<> wordCountDist(lengMin, lengMax);
     int wordCount = wordCountDist(rng);
 
     for (int i = 0; i < wordCount; i++) {
@@ -170,7 +172,7 @@ std::string wordGenerator::generateSentence(int lengMin, int lengMax) {
     mySentence.erase(mySentence.find_last_not_of(' ') + 1);
     mySentence.erase(mySentence.find_last_not_of(',') + 1);
     mySentence += ". ";
-    mySentence[0] = std::toupper(mySentence[0]);
+    mySentence[0] = toupper(mySentence[0]);
 
     return mySentence;
 }
@@ -181,9 +183,9 @@ std::string wordGenerator::generateSentence(int lengMin, int lengMax) {
 // Output: Stored internally in outputText
 // Author: Owen Mather (10592925)
 // Date: 23/04/2025
-void wordGenerator::generateText() {
+void notGPT::generateText() {
     this->outputText = ""; // Clear previous output
-    std::uniform_int_distribution<> sentenceCountDist(4, 8);
+    uniform_int_distribution<> sentenceCountDist(4, 8);
     int sentenceCount = sentenceCountDist(rng);
 
     for (int i = 0; i < sentenceCount; ++i) {
